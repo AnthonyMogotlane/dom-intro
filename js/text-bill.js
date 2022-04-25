@@ -51,12 +51,15 @@ function color() {
     if (totalOne.textContent >= 50) {
         totalOne.classList.add("danger");
         totalOne.classList.remove("warning");
+        totalOne.classList.remove("dark");
     } else if (totalOne.textContent >= 30) {
         totalOne.classList.add("warning");
-    } else {
+        totalOne.classList.remove("dark");
         totalOne.classList.remove("danger");
+    } else if (totalOne.textContent <= 29) {
+        totalOne.classList.add("dark");
         totalOne.classList.remove("warning");
-        totalOne.style.color = "#222";
+        totalOne.classList.remove("danger");
     }
 }
 color();

@@ -16,6 +16,10 @@
   font-weight: bold;
 }
 
+.dark {
+  color: #222;
+}
+
 .total {
   font-weight: bold;
   font-size: 2em;
