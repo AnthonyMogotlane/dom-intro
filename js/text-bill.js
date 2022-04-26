@@ -8,21 +8,29 @@ const callTotalOne = document.querySelector(".callTotalOne");
 const smsTotalOne = document.querySelector(".smsTotalOne");
 //create a variable that will keep track of the total bill
 const totalOne = document.querySelector(".totalOne")
+//colors funtion to indicate the user on the limits
+//if the bill is over 30 should show the color in orange
+//if the bill is over 50 should show the color in red
+function colors() {
+    if (totalOne.textContent >= 50) {
+        totalOne.classList.add("danger");
+        totalOne.classList.remove("warning");
+    } else if (totalOne.textContent >= 30 && totalOne.textContent <= 49) {
+        totalOne.classList.add("warning");
+        totalOne.classList.remove("danger");
+    }
+}
+colors();
 //add an event listener for when the add button is pressed
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
-
 const addTotals = () => {
     //checking if the input is sms or call, if not we return 'invalid input'
     if (!["call", "sms"].includes(billTypeText.value.trim())) {
         alert("invalid value, Enter 'sms' or 'call'");
     } else {
-        //if the bill is over 30 should show the color in orange
-        //if the bill is over 50 should show the color in red  
-        color();
-
         if (billTypeText.value.trim() === 'call') {
             //adding call bill just made to the total call bill
             let totalCall = parseFloat(callTotalOne.textContent) + 2.75;
@@ -36,33 +44,11 @@ const addTotals = () => {
         //adding recent bill to the total bill
         let totalCost = parseFloat(totalOne.textContent) + parseFloat(totalPhoneBill(billTypeText.value.trim()));
         totalOne.textContent = totalCost.toFixed(2);
+        //calling colors function
+        colors();
     }
 }
 addToBillBtn.addEventListener("click", addTotals);
-//adding totals when enter key is pressed
-billTypeText.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-        addTotals();
-    }
-});
-//if the bill is over 30 should show the color in orange
-//if the bill is over 50 should show the color in red
-function color() {
-    if (totalOne.textContent >= 50) {
-        totalOne.classList.add("danger");
-        totalOne.classList.remove("warning");
-        totalOne.classList.remove("dark");
-    } else if (totalOne.textContent >= 30) {
-        totalOne.classList.add("warning");
-        totalOne.classList.remove("dark");
-        totalOne.classList.remove("danger");
-    } else if (totalOne.textContent <= 29) {
-        totalOne.classList.add("dark");
-        totalOne.classList.remove("warning");
-        totalOne.classList.remove("danger");
-    }
-}
-color();
 //the function calculating the current total bill of the call or sms made.
 var totalPhoneBill = function (callAndSms) {
     var callBill = 0;
@@ -83,11 +69,3 @@ var totalPhoneBill = function (callAndSms) {
 
     return totalBill.toFixed(2);
 }
-//Reseting the bill
-document.querySelector(".resetToBillBtn").addEventListener("click", () => {
-    callTotalOne.textContent = "0.00";
-    smsTotalOne.textContent = "R.00";
-    totalOne.textContent = "0.00";
-    color();
-})
-

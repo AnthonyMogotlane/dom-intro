@@ -1,6 +1,6 @@
 //get a reference to the sms or call radio buttons
-const checkedCall = document.querySelector("#call");
-const checkedSms = document.querySelector("#sms");
+const checkedCall = document.querySelector("#callOne");
+const checkedSms = document.querySelector("#smsOne");
 //reference for sms and call totals
 const callTotalTwo = document.querySelector(".callTotalTwo");
 const smsTotalTwo = document.querySelector(".smsTotalTwo");
@@ -13,7 +13,6 @@ const totalTwo = document.querySelector(".totalTwo");
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
-
 radioBillAddBtn.addEventListener("click", () => {
     //setting the checked radio button value to billItemType
     let billItemType = 'click call or sms'; //if no radio button checked it will alert with this string
@@ -42,16 +41,10 @@ function color() {
     if (totalTwo.textContent >= 50) {
         totalTwo.classList.add("danger");
         totalTwo.classList.remove("warning");
-        totalTwo.classList.remove("dark");
     } else if (totalTwo.textContent >= 30) {
         totalTwo.classList.add("warning");
-        totalTwo.classList.remove("dark");
         totalTwo.classList.remove("danger");
-    } else if (totalTwo.textContent <= 29) {
-        totalTwo.classList.add("dark");
-        totalTwo.classList.remove("warning");
-        totalTwo.classList.remove("danger");
-    }
+    } 
 }
 color();
 //the function calculating the current total bill of the call or sms checked.
