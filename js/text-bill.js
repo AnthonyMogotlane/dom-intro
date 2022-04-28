@@ -28,10 +28,11 @@ colours();
 // * display the latest total on the screen
 const addTotals = () => {
     //checking if the input is sms or call, if not we return 'invalid input'
-    if (!["call", "sms"].includes(billTypeText.value.trim())) {
+    let billInput = billTypeText.value.toLowerCase().trim();
+    if (!["call", "sms"].includes(billInput)) {
         alert("invalid value, Enter 'sms' or 'call'");
     } else {
-        if (billTypeText.value.trim() === 'call') {
+        if (billInput === 'call') {
             //adding call bill just made to the total call bill
             let totalCall = parseFloat(callTotalOne.textContent) + 2.75;
             callTotalOne.textContent = totalCall.toFixed(2);
@@ -42,7 +43,7 @@ const addTotals = () => {
         }
 
         //adding recent bill to the total bill
-        let totalCost = parseFloat(totalOne.textContent) + parseFloat(totalPhoneBill(billTypeText.value.trim()));
+        let totalCost = parseFloat(totalOne.textContent) + parseFloat(totalPhoneBill(billInput));
         totalOne.textContent = totalCost.toFixed(2);
         //calling colors function
         colours();
