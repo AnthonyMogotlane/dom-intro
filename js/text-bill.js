@@ -11,7 +11,7 @@ const totalOne = document.querySelector(".totalOne")
 //colors funtion to indicate the user on the limits
 //if the bill is over 30 should show the color in orange
 //if the bill is over 50 should show the color in red
-function colors() {
+function colours() {
     if (totalOne.textContent >= 50) {
         totalOne.classList.add("danger");
         totalOne.classList.remove("warning");
@@ -20,7 +20,7 @@ function colors() {
         totalOne.classList.remove("danger");
     }
 }
-colors();
+colours();
 //add an event listener for when the add button is pressed
 //in the event listener check if the value in the bill type textbox is 'sms' or 'call'
 // * add the appropriate value to the running total
@@ -45,7 +45,7 @@ const addTotals = () => {
         let totalCost = parseFloat(totalOne.textContent) + parseFloat(totalPhoneBill(billTypeText.value.trim()));
         totalOne.textContent = totalCost.toFixed(2);
         //calling colors function
-        colors();
+        colours();
     }
 }
 addToBillBtn.addEventListener("click", addTotals);
