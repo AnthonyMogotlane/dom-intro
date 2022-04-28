@@ -21,15 +21,10 @@ const totalThree = document.querySelector(".totalSettings");
 //add an event listener for when the 'Update settings' button is pressed
 updateSettingBtn.addEventListener("click", () => {
     //updating all the relevent variable fields
-    if(callCostSetting.value != "") callCost = parseFloat(callCostSetting.value);
-    if(smsCostSetting.value != "") smsCost = parseFloat(smsCostSetting.value);
-    if(warningLevelSetting.value != "") warningLevel = parseInt(warningLevelSetting.value);
-    if(criticalLevelSetting.value != "") dangerLevel = parseInt(criticalLevelSetting.value);
-    //setting the field back to empty after being updated
-    callCostSetting.value = "";
-    smsCostSetting.value = "";
-    warningLevelSetting.value = "";
-    criticalLevelSetting.value = "";
+    if (callCostSetting.value != "") callCost = parseFloat(callCostSetting.value);
+    if (smsCostSetting.value != "") smsCost = parseFloat(smsCostSetting.value);
+    if (warningLevelSetting.value != "") warningLevel = parseInt(warningLevelSetting.value);
+    if (criticalLevelSetting.value != "") dangerLevel = parseInt(criticalLevelSetting.value);
 })
 
 //reference to the sms or call radio buttons
@@ -38,7 +33,6 @@ const checkedSmsSetting = document.querySelector("#smsTwo");
 
 //get a reference to the add button
 const radioBillAddBtnSetting = document.querySelector(".radioBillAddBtnSetting");
-
 //add an event listener for when the add button is pressed
 //in the event listener get the value from the billItemTypeRadio radio buttons
 // * add the appropriate value to the call / sms total
@@ -51,20 +45,22 @@ radioBillAddBtnSetting.addEventListener("click", () => {
     let billItemTypeSetting = 'check call or sms'; //if no radio button checked it will alert with this string
     if (checkedCallSetting.checked === true) billItemTypeSetting = checkedCallSetting.value;
     if (checkedSmsSetting.checked === true) billItemTypeSetting = checkedSmsSetting.value;
-    //checking if the checked radio btn is sms or call then add relevent total
-    if (checkedCallSetting.checked == true) {
-        //adding call bill just made to the total call bill
-        let totalCall = parseFloat(callTotalThree.textContent) + callCost;
-        callTotalThree.textContent = totalCall.toFixed(2);
-    } else if (checkedSmsSetting.checked == true) {
-        //adding sms bill just made to the total call bill
-        let totalSms = parseFloat(smsTotalThree.textContent) + smsCost;
-        smsTotalThree.textContent = totalSms.toFixed(2);
-    }
-
+    
     //adding recent bill to the total bill
     let totalCost = parseFloat(totalThree.textContent) + parseFloat(totalPhoneBills(billItemTypeSetting));
-    totalThree.textContent = totalCost.toFixed(2);
+    if (totalCost <= dangerLevel) {
+        totalThree.textContent = totalCost.toFixed(2);
+        //checking if the checked radio btn is sms or call then add relevent total
+        if (checkedCallSetting.checked == true) {
+            //adding call bill just made to the total call bill
+            let totalCall = parseFloat(callTotalThree.textContent) + callCost;
+            callTotalThree.textContent = totalCall.toFixed(2);
+        } else if (checkedSmsSetting.checked == true) {
+            //adding sms bill just made to the total call bill
+            let totalSms = parseFloat(smsTotalThree.textContent) + smsCost;
+            smsTotalThree.textContent = totalSms.toFixed(2);
+        }
+    }
     colorsSettings();
 })
 
@@ -84,16 +80,16 @@ var totalPhoneBills = function (callAndSms) {
 
     return totalBill.toFixed(2);
 }
-
 //if the bill is over 30 should show the color in orange
 //if the bill is over 50 should show the color in red
 function colorsSettings() {
     if (totalThree.textContent >= dangerLevel) {
         totalThree.classList.add("danger");
         totalThree.classList.remove("warning");
+
     } else if (totalThree.textContent >= warningLevel) {
         totalThree.classList.add("warning");
         totalThree.classList.remove("danger");
-    } 
+    }
 }
 colorsSettings();
