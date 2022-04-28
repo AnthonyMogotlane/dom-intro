@@ -9,7 +9,7 @@ const billStringElement = document.querySelector(".billString");
 //  * once done looping over all the entries - display the total onto the screen in the billTotal element
 document.querySelector(".calculateBtn").addEventListener("click", () => {
     // get the string entered in the textArea
-    var billString = billStringElement.value;
+    var billString = billStringElement.value.toLowerCase();
     //split the string
     var billItems = billString.split(",");
     // a variable for the total phone bill.
