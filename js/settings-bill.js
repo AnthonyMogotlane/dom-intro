@@ -20,10 +20,16 @@ const totalThree = document.querySelector(".totalSettings");
 
 //add an event listener for when the 'Update settings' button is pressed
 updateSettingBtn.addEventListener("click", () => {
-    callCost = parseFloat(callCostSetting.value);
-    smsCost = parseFloat(smsCostSetting.value);
-    warningLevel = parseInt(warningLevelSetting.value);
-    dangerLevel = parseInt(criticalLevelSetting.value);
+    //updating all the relevent variable fields
+    if(callCostSetting.value != "") callCost = parseFloat(callCostSetting.value);
+    if(smsCostSetting.value != "") smsCost = parseFloat(smsCostSetting.value);
+    if(warningLevelSetting.value != "") warningLevel = parseInt(warningLevelSetting.value);
+    if(criticalLevelSetting.value != "") dangerLevel = parseInt(criticalLevelSetting.value);
+    //setting the field back to empty after being updated
+    callCostSetting.value = "";
+    smsCostSetting.value = "";
+    warningLevelSetting.value = "";
+    criticalLevelSetting.value = "";
 })
 
 //reference to the sms or call radio buttons
@@ -91,6 +97,3 @@ function colorsSettings() {
     } 
 }
 colorsSettings();
-
-
-
