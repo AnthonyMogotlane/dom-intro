@@ -33,11 +33,11 @@ radioBillAddBtn.addEventListener("click", () => {
     let totalCost = parseFloat(totalTwo.textContent) + parseFloat(totalPhoneBill(billItemType));
     totalTwo.textContent = totalCost.toFixed(2);
 
-    color();
+    colorRadio();
 })
 //if the bill is over 30 should show the color in orange
 //if the bill is over 50 should show the color in red
-function color() {
+function colorRadio() {
     if (totalTwo.textContent >= 50) {
         totalTwo.classList.add("danger");
         totalTwo.classList.remove("warning");
@@ -46,7 +46,7 @@ function color() {
         totalTwo.classList.remove("danger");
     } 
 }
-color();
+colorRadio();
 //the function calculating the current total bill of the call or sms checked.
 var totalPhoneBill = function (callAndSms) {
     var callBill = 0;
