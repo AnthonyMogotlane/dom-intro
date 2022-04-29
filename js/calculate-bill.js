@@ -7,7 +7,7 @@ const billStringElement = document.querySelector(".billString");
 //  * loop over all the entries in the the resulting list
 //  * check if it is a call or an sms and add the right amount to the overall total
 //  * once done looping over all the entries - display the total onto the screen in the billTotal element
-document.querySelector(".calculateBtn").addEventListener("click", () => {
+const calculateBill = () => {
     // get the string entered in the textArea
     var billString = billStringElement.value.toLowerCase();
     //split the string
@@ -30,5 +30,12 @@ document.querySelector(".calculateBtn").addEventListener("click", () => {
 
     if (roundedBillTotal >= 30) billTotalElement.style.color = "orange";
     if (roundedBillTotal >= 50) billTotalElement.style.color = "red";
+}
+document.querySelector(".calculateBtn").addEventListener("click", calculateBill)
+//When 'Enter' key pressed will calculate the total
+billStringElement.addEventListener("keypress", (e) => {
+    if(ekey = "Enter") {
+        calculateBill();
+    }
 })
-//link the function to a click event on the calculate button
+
