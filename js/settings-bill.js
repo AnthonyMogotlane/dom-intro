@@ -25,6 +25,7 @@ updateSettingBtn.addEventListener("click", () => {
     if (smsCostSetting.value != "") smsCost = parseFloat(smsCostSetting.value);
     if (warningLevelSetting.value != "") warningLevel = parseInt(warningLevelSetting.value);
     if (criticalLevelSetting.value != "") dangerLevel = parseInt(criticalLevelSetting.value);
+    colorsSettings();
 })
 
 //reference to the sms or call radio buttons
