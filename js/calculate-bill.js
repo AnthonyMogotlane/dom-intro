@@ -34,7 +34,7 @@ const calculateBill = () => {
 document.querySelector(".calculateBtn").addEventListener("click", calculateBill)
 //When 'Enter' key pressed will calculate the total
 billStringElement.addEventListener("keypress", (e) => {
-    if(ekey = "Enter") {
+    if(e.key === "Enter") {
         calculateBill();
     }
 })

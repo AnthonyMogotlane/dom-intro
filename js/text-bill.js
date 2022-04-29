@@ -50,6 +50,12 @@ const addTotals = () => {
     }
 }
 addToBillBtn.addEventListener("click", addTotals);
+//When 'Enter' key pressed will calculate the total
+billTypeText.addEventListener("keypress", (e) => {
+    if(e.key === "Enter") {
+        addTotals();
+    }
+})
 //the function calculating the current total bill of the call or sms made.
 var totalPhoneBill = function (callAndSms) {
     var callBill = 0;
