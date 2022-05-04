@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>TDD using Mocha and Chai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+  </head>
+
+<body>
+    <div id="mocha">Bootcamp Function Tests</div>
+    <script>
+        mocha.setup('bdd');
+        var assert = chai.assert;
+    </script>
+    <!-- billWithSettings function -->
+    <script src="../js/settings-bill.js"></script>
+    <script src="settings-bill.test.js"></script>
+
+    <script>
+        mocha.checkLeaks();
+        mocha.run();
+    </script>
+</body>
+</html>
