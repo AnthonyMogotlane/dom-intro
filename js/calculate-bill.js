@@ -38,4 +38,3 @@ billStringElement.addEventListener("keypress", (e) => {
         calculateBill();
     }
 })
-
