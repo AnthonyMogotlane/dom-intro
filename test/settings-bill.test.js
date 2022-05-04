@@ -48,3 +48,19 @@ describe("The billWithSettings factory function", () => {
         assert.equal(settingBillTwo.getCriticalLevel(), 80);
     })
 })
+
+describe("Use values", () => {
+    it("It should be able to use call cost, sms cost, warning level value and critical level sets", () => {
+        let settingsBill = billWithSettings();
+
+        settingsBill.setCallCost(2.20);
+        // settingsBill.setSmsCost(0.95);
+
+        settingsBill.makeCall();
+        settingsBill.makeCall();
+
+        assert.equal(settingsBill.getTotalCallCost(), 4.40, "Checks your total call cost calculations")
+        assert.equal(settingsBill.getTotalSmsCost(), 0.00, "Checks your total sms cost calculations")
+        assert.equal(settingsBill.getTotalCost(), 4.40, "Checks your totals cost calculations")
+    })
+})

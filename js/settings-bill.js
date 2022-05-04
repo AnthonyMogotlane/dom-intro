@@ -97,13 +97,17 @@
 
 
 //============================================================
-
+//factory function
 const billWithSettings = () => {
     //variables
     let callCost = 0;
     let smsCost = 0;
     let warningLevel = 0;
     let criticalLevel = 0;
+
+    let totalCallCost = 0;
+    let totalSmsCost = 0;
+    let totalCost = 0;
 
     //setting the call cost function
     const setCallCost = call => callCost = call;
@@ -126,7 +130,33 @@ const billWithSettings = () => {
      //returning the critical level value function
     //closure - it can access the surrounding variables
     const getCriticalLevel = () => criticalLevel;
-    
+
+    //function adding to totalCallCost when a call is made.
+    const makeCall = () => {
+        return totalCallCost += getCallCost();
+    }
+    //function adding to totalCallCost when a call is made.
+    const makeSms = () => {
+        return totalSmsCost += getSmsCost();
+    }
+    //function calculating overall total cost
+    const calculateBill = () => {
+        return totalCost += makeCall() + makeSms();
+    }
+    //function returning the total calls made
+    const getTotalCallCost = () => {
+        return totalCallCost.toFixed(2);
+    }
+    //function returning the total sms made
+    const getTotalSmsCost = () => {
+        return totalSmsCost.toFixed(2);
+    }
+    //function returning the total calls and sms's made
+    const getTotalCost = () => {
+        return calculateBill().toFixed(2);
+    }
+
+
     return {
         setCallCost,
         setSmsCost,
@@ -135,15 +165,28 @@ const billWithSettings = () => {
         getCallCost,
         getSmsCost,
         getWarningLevel,
-        getCriticalLevel
+        getCriticalLevel,
+        makeCall,
+        makeSms,
+        getTotalCallCost,
+        getTotalSmsCost,
+        calculateBill,
+        getTotalCost
     }
 }
 
 //instanciate an object
 let currentCallCost = billWithSettings();
 
-currentCallCost.setCallCost(1.80);
-console.log(currentCallCost.getCallCost());
+currentCallCost.setCallCost(1);
+
+currentCallCost.makeCall();
+currentCallCost.makeCall();
+
+
+
+console.log(currentCallCost.getTotalCost());
+
 
 
 
