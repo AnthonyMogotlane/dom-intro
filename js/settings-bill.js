@@ -10,8 +10,8 @@ const callTotalThree = document.querySelector(".callTotalSettings");
 const smsTotalThree = document.querySelector(".smsTotalSettings");
 const totalThree = document.querySelector(".totalSettings");
 
-//function with an instance of billWithSetting
-    let settingCosts = billWithSettings();
+//instance of billWithSetting
+let settingCosts = billWithSettings();
 
 //reference to the 'Update settings' button
 const updateSettingBtn = document.querySelector(".updateSettings")
@@ -24,6 +24,12 @@ updateSettingBtn.addEventListener("click", () => {
     settingCosts.setCriticalLevel(Number(criticalLevelSetting.value));
 
     colorIndicator(settingCosts.classSelector())
+
+    //alert user when update button is clicked
+    document.querySelector(".update-alert").style.display = "inline";
+    setTimeout(() => {
+        document.querySelector(".update-alert").style.display = "none";
+    }, 1500)
 })
 
 
