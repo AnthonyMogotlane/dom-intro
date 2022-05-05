@@ -1,4 +1,6 @@
-describe("The billWithSettings factory function", () => {
+describe("The billWithSettings function", () => {
+
+describe("set values", () => {
     it("should set the call cost", () => {
         let settingsBill = billWithSettings();
 
@@ -49,7 +51,7 @@ describe("The billWithSettings factory function", () => {
     })
 })
 
-describe("Use values", () => {
+describe("use values", () => {
     it("should be able to make 2 call at 2.20 per call", () => {
         let settingsBill = billWithSettings();
 
@@ -75,7 +77,7 @@ describe("Use values", () => {
         settingsBill.makeSms();
         settingsBill.makeSms();
 
-        assert.equal(settingsBill.getTotalCallCost(), 0, "Check your total call cost calculations");
+        assert.equal(settingsBill.getTotalCallCost(), 0.00, "Check your total call cost calculations");
         assert.equal(settingsBill.getTotalSmsCost(), 2.85, "Check your total sms cost calculations");
         assert.equal(settingsBill.getTotalCost(), 2.85, "Check your total cost calculations");
     })
@@ -167,4 +169,5 @@ describe("warning and critical level values", () => {
         assert.isAtLeast(settingsBill.getTotalCost(), 20, "Check your total cost calculations");
         assert.equal(settingsBill.classSelector(), "danger");
     })
+})
 })
