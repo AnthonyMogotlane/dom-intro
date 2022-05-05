@@ -133,29 +133,46 @@ const billWithSettings = () => {
 
     //function adding to totalCallCost when a call is made.
     const makeCall = () => {
-        return totalCallCost += getCallCost();
+        if(!criticalLevelReached()) {
+            return totalCallCost += getCallCost();
+        }
     }
     //function adding to totalCallCost when a call is made.
     const makeSms = () => {
-        return totalSmsCost += getSmsCost();
-    }
-    //function calculating overall total cost
-    const calculateBill = () => {
-        return totalCost += makeCall() + makeSms();
+        if(!criticalLevelReached()) {
+            return totalSmsCost += getSmsCost();
+        }
     }
     //function returning the total calls made
     const getTotalCallCost = () => {
-        return totalCallCost.toFixed(2);
+        return parseFloat(totalCallCost.toFixed(2));;
     }
     //function returning the total sms made
     const getTotalSmsCost = () => {
-        return totalSmsCost.toFixed(2);
+        return parseFloat(totalSmsCost.toFixed(2));
+    }
+    //function calculating overall total cost
+    const calculateBill = () => {
+        return getTotalCallCost() + getTotalSmsCost();
     }
     //function returning the total calls and sms's made
     const getTotalCost = () => {
-        return calculateBill().toFixed(2);
+        return Math.round(calculateBill() * 100) / 100;
     }
 
+    //function with a condition checking if the critica value is reched
+    const criticalLevelReached = () => {
+        return getTotalCost() >= getCriticalLevel();
+    }
+
+    //function to return relevent class if one of the condition is reached
+    const classSelector = () => {
+        if(criticalLevelReached()) {
+            return "danger";
+        } else if(getTotalCost() >= getWarningLevel()) {
+            return "warning";
+        }
+    }
 
     return {
         setCallCost,
@@ -171,21 +188,79 @@ const billWithSettings = () => {
         getTotalCallCost,
         getTotalSmsCost,
         calculateBill,
-        getTotalCost
+        getTotalCost,
+        classSelector,
+        criticalLevelReached
+    }
+}
+//refences to all the settings fields
+const callCostSetting = document.querySelector(".callCostSetting");
+const smsCostSetting = document.querySelector(".smsCostSetting");
+const warningLevelSetting = document.querySelector(".warningLevelSetting");
+const criticalLevelSetting = document.querySelector(".criticalLevelSetting");
+
+//variables that will keep track of all three totals.
+const callTotalThree = document.querySelector(".callTotalSettings");
+const smsTotalThree = document.querySelector(".smsTotalSettings");
+const totalThree = document.querySelector(".totalSettings");
+
+//function with an instance of billWithSetting
+    let settingCosts = billWithSettings();
+
+//reference to the 'Update settings' button
+const updateSettingBtn = document.querySelector(".updateSettings")
+
+updateSettingBtn.addEventListener("click", () => {
+
+    settingCosts.setCallCost(Number(callCostSetting.value));
+    settingCosts.setSmsCost(Number(smsCostSetting.value));
+    settingCosts.setWarningLevel(Number(warningLevelSetting.value));
+    settingCosts.setCriticalLevel(Number(criticalLevelSetting.value));
+
+    colorIndicator(settingCosts.classSelector())
+    alert("updated");
+})
+
+
+//reference to the sms or call radio buttons
+const checkedCallSetting = document.querySelector("#callTwo");
+const checkedSmsSetting = document.querySelector("#smsTwo");
+//reference to the add button
+const radioBillAddBtnSetting = document.querySelector(".radioBillAddBtnSetting");
+
+radioBillAddBtnSetting.addEventListener("click", () => {
+    let totalBill = 0; //variable to store sum of calls and sms costs
+    //if call is checked update the call total
+    if(checkedCallSetting.checked) {
+        let totalCall = parseFloat(callTotalThree.textContent) + settingCosts.getCallCost();
+        callTotalThree.textContent = totalCall.toFixed(2);
+        //adding a call bill to total bill
+        totalThree.textContent = (totalBill += totalCall).toFixed(2);
+    }
+    //if sms is checked update the sms total
+    if(checkedSmsSetting.checked) {
+        let totalSms = parseFloat(smsTotalThree.textContent) + settingCosts.getSmsCost();
+        smsTotalThree.textContent = totalSms.toFixed(2);
+        //adding sms bill to total bill
+        totalThree.textContent = (totalBill += totalCall).toFixed(2);
+    }
+
+    colorIndicator(settingCosts.classSelector())
+    console.log(settingCosts.classSelector());
+})
+
+//Color indicator function for warning and critical level
+const colorIndicator = className => {
+    if (className === "danger") {
+        totalThree.classList.add("danger");
+        totalThree.classList.remove("warning");
+
+    } else if (className === "warning") {
+        totalThree.classList.add("warning");
+        totalThree.classList.remove("danger");
     }
 }
 
-//instanciate an object
-let currentCallCost = billWithSettings();
-
-currentCallCost.setCallCost(1);
-
-currentCallCost.makeCall();
-currentCallCost.makeCall();
-
-
-
-console.log(currentCallCost.getTotalCost());
 
 
 
