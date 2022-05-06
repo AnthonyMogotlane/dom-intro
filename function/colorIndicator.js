@@ -1,5 +1,5 @@
 //Color indicator function for warning and critical level
-const colorIndicator = className => {
+const colorIndicator = (className, totalElement) => {
     if (className === "danger") {
         totalElement.classList.add("danger");
         totalElement.classList.remove("warning");

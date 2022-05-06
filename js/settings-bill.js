@@ -12,8 +12,6 @@ const totalThree = document.querySelector(".totalSettings");
 
 //instance of billWithSetting
 let settingCosts = billWithSettings();
-//colorIndicator variable reference
-let totalElement = totalThree;
 
 //reference to the 'Update settings' button
 const updateSettingBtn = document.querySelector(".updateSettings")
@@ -26,7 +24,7 @@ updateSettingBtn.addEventListener("click", () => {
     settingCosts.setCriticalLevel(Number(criticalLevelSetting.value));
 
     
-    colorIndicator(settingCosts.classSelector())
+    colorIndicator(settingCosts.classSelector(), totalThree)
 
     //alert user when update button is clicked
     document.querySelector(".update-alert").style.display = "inline";
@@ -58,7 +56,7 @@ radioBillAddBtnSetting.addEventListener("click", () => {
         totalThree.textContent = settingCosts.getTotalCost().toFixed(2);
     }
 
-    colorIndicator(settingCosts.classSelector())
+    colorIndicator(settingCosts.classSelector(), totalThree)
 })
 
 
