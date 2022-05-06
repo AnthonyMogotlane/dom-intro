@@ -25,6 +25,20 @@ const calculateBill = () => {
     }
     //get total bill
     const getTotalBill = () => setTotalBill();
+    //set warning and critical level
+    const setlevelIndicator = () => {
+        if(getTotalBill() >= 30) {
+            return "danger";
+        } else if(getTotalBill() >= 20) {
+            return "warning";
+        } else if(getTotalBill() < 20) {
+            return "dark";
+        }
+    }
+    //get warning and critical level class
+    const getLevelIndicator = () => {
+        return setlevelIndicator();
+    }
 
     return {
         setBill,
@@ -34,6 +48,8 @@ const calculateBill = () => {
         setSmsCost,
         getSmsCost,
         setTotalBill,
-        getTotalBill
+        getTotalBill,
+        setlevelIndicator,
+        getLevelIndicator
     }
 }

@@ -12,6 +12,8 @@ const totalThree = document.querySelector(".totalSettings");
 
 //instance of billWithSetting
 let settingCosts = billWithSettings();
+//colorIndicator variable reference
+let totalElement = totalThree;
 
 //reference to the 'Update settings' button
 const updateSettingBtn = document.querySelector(".updateSettings")
@@ -23,13 +25,14 @@ updateSettingBtn.addEventListener("click", () => {
     settingCosts.setWarningLevel(Number(warningLevelSetting.value));
     settingCosts.setCriticalLevel(Number(criticalLevelSetting.value));
 
+    
     colorIndicator(settingCosts.classSelector())
 
     //alert user when update button is clicked
     document.querySelector(".update-alert").style.display = "inline";
     setTimeout(() => {
         document.querySelector(".update-alert").style.display = "none";
-    }, 1500)
+    }, 2000)
 })
 
 
@@ -44,8 +47,6 @@ radioBillAddBtnSetting.addEventListener("click", () => {
     if(checkedCallSetting.checked) {
         settingCosts.makeCall();
         callTotalThree.textContent = settingCosts.getTotalCallCost().toFixed(2);
-        console.log(settingCosts.makeCall())
-        console.log(settingCosts.getTotalCallCost());
         //adding a call bill to total bill
         totalThree.textContent = settingCosts.getTotalCost().toFixed(2);
     }
@@ -59,23 +60,6 @@ radioBillAddBtnSetting.addEventListener("click", () => {
 
     colorIndicator(settingCosts.classSelector())
 })
-
-//Color indicator function for warning and critical level
-const colorIndicator = className => {
-    if (className === "danger") {
-        totalThree.classList.add("danger");
-        totalThree.classList.remove("warning");
-        totalThree.classList.remove("dark");
-    } else if (className === "warning") {
-        totalThree.classList.add("warning");
-        totalThree.classList.remove("danger");
-        totalThree.classList.remove("dark");
-    }   if (className === "dark") {
-        totalThree.classList.add("dark");
-        totalThree.classList.remove("danger");
-        totalThree.classList.remove("warning");
-    }
-}
 
 
 

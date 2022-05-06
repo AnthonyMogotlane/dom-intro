@@ -38,6 +38,7 @@ textarea {
 /* update setting button */
 .button-primary:active {
   transition: .5s ease-out;
+  box-shadow: 0 4px 4px 7px #000;
   background: #000 !important;
 }
 
