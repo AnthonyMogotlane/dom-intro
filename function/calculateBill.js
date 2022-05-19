@@ -1,27 +1,38 @@
 //factory function
 const calculateBill = () => {
-    let billList = [];
+    let callBill = 0;
+    let smsBill = 0;
+    let bill = "";
     //converting the string input into a bill list
-    const setBill = inputBill => billList = inputBill.split(",");
+    const setBill = inputBill => {
+        if(["call", "sms"].includes(inputBill.toLowerCase())) {
+            return bill = inputBill.toLowerCase();
+        } else {
+            alert("Enter 'call' or 'sms'");
+        }
+    }
     //bill list as an array
-    const getBill = () => billList;
+    const getBill = () => bill;
 
     //set call bill costs
-    const setCallCost = () => 2.75;
+    const setCallCost = () => {
+        if(getBill() === "call") {
+            return callBill += 2.75; 
+        }
+    }
     //get call bill costs
-    const getCallCost = () => setCallCost();
+    const getCallCost = () => callBill;
     //set sms bill costs
-    const setSmsCost = () => 0.75;
+    const setSmsCost = () => {
+        if(getBill() === "sms") {
+            return smsBill += 0.75; 
+        }
+    }
     //get sms bill costs
-    const getSmsCost = () => setSmsCost();
+    const getSmsCost = () => smsBill;
     //set total bill
     const setTotalBill = () => {
-        let totalBill = 0;
-        for(let cost of getBill()) {
-            if(cost.trim().toLowerCase() === "call") totalBill += getCallCost();
-            if(cost.trim().toLowerCase() === "sms") totalBill += getSmsCost();
-        }
-        return totalBill;
+        return getCallCost() + getSmsCost();
     }
     //get total bill
     const getTotalBill = () => setTotalBill();
@@ -53,3 +64,14 @@ const calculateBill = () => {
         getLevelIndicator
     }
 }
+
+let test = calculateBill();
+test.setBill("sms");
+
+test.setBill("call")
+
+
+
+console.log("call", test.getCallCost())
+console.log("sms", test.getSmsCost())
+console.log("total", test.getTotalBill())
