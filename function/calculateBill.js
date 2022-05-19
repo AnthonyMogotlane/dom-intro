@@ -1,29 +1,28 @@
 //factory function
 const calculateBill = () => {
-    let callBill = 0;
-    let smsBill = 0;
-    let errorText = "";
-    let bill = "";
+    let billList = [];
     //converting the string input into a bill list
-    const setBill = inputBill => (["call", "sms"].includes(inputBill.toLowerCase())) ? bill = inputBill.toLowerCase() : errorText = "Enter 'call' or 'sms'";
+    const setBill = inputBill => billList = inputBill.split(",");
     //bill list as an array
-    const getBill = () => bill;
-    //get error text
-    const getErrorText = () => errorText;
-    //error message 
-    const setErrorMsg = () => (getErrorText() === "Enter 'call' or 'sms'") ? errorText : "";
-    //get error message
-    const getErrorMsg = () => setErrorMsg();
+    const getBill = () => billList;
+
     //set call bill costs
-    const setCallCost = () => (getBill() === "call") ? callBill += 2.75: "";
+    const setCallCost = () => 2.75;
     //get call bill costs
-    const getCallCost = () => callBill;
+    const getCallCost = () => setCallCost();
     //set sms bill costs
-    const setSmsCost = () => (getBill() === "sms") ? smsBill += 0.75 : "";
+    const setSmsCost = () => 0.75;
     //get sms bill costs
-    const getSmsCost = () => smsBill;
+    const getSmsCost = () => setSmsCost();
     //set total bill
-    const setTotalBill = () => getCallCost() + getSmsCost();
+    const setTotalBill = () => {
+        let totalBill = 0;
+        for(let cost of getBill()) {
+            if(cost.trim().toLowerCase() === "call") totalBill += getCallCost();
+            if(cost.trim().toLowerCase() === "sms") totalBill += getSmsCost();
+        }
+        return totalBill;
+    }
     //get total bill
     const getTotalBill = () => setTotalBill();
     //set warning and critical level
@@ -37,7 +36,10 @@ const calculateBill = () => {
         }
     }
     //get warning and critical level class
-    const getLevelIndicator = () => setlevelIndicator();
+    const getLevelIndicator = () => {
+        return setlevelIndicator();
+    }
+
     return {
         setBill,
         getBill,
@@ -48,19 +50,6 @@ const calculateBill = () => {
         setTotalBill,
         getTotalBill,
         setlevelIndicator,
-        getLevelIndicator,
-        getErrorText,
-        setErrorMsg,
-        getErrorMsg
+        getLevelIndicator
     }
 }
-
-// let test = calculateBill();
-// test.setBill("sm");
-// test.setCallCost()
-
-// console.log("call", test.getCallCost())
-// console.log("sms", test.getSmsCost())
-// console.log("total", test.getTotalBill())
-// console.log("levelindicator:", test.getLevelIndicator())
-// console.log("Error Msg:", test.getErrorMsg())
