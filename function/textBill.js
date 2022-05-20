@@ -5,7 +5,7 @@ const textBill = () => {
     let errorText = "";
     let bill = "";
     //converting the string input into a bill list
-    const setBill = inputBill => (["call", "sms"].includes(inputBill.toLowerCase())) ? bill = inputBill.toLowerCase() : errorText = "Enter 'call' or 'sms'";
+    const setBill = inputBill => (["call", "sms"].includes(inputBill.toLowerCase())) ? bill = inputBill.toLowerCase() : alert("Enter 'call' or 'sms'");
     //bill list as an array
     const getBill = () => bill;
     //get error text
@@ -28,11 +28,11 @@ const textBill = () => {
     const getTotalBill = () => setTotalBill();
     //set warning and critical level
     const setlevelIndicator = () => {
-        if(getTotalBill() >= 30) {
+        if(getTotalBill() >= 50) {
             return "danger";
-        } else if(getTotalBill() >= 20) {
+        } else if(getTotalBill() >= 30) {
             return "warning";
-        } else if(getTotalBill() < 20) {
+        } else if(getTotalBill() < 30) {
             return "dark";
         }
     }
@@ -54,13 +54,3 @@ const textBill = () => {
         getErrorMsg
     }
 }
-
-// let test = calculateBill();
-// test.setBill("sm");
-// test.setCallCost()
-
-// console.log("call", test.getCallCost())
-// console.log("sms", test.getSmsCost())
-// console.log("total", test.getTotalBill())
-// console.log("levelindicator:", test.getLevelIndicator())
-// console.log("Error Msg:", test.getErrorMsg())

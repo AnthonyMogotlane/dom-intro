@@ -1,4 +1,3 @@
-
 //refences to all the settings fields
 const callCostSetting = document.querySelector(".callCostSetting");
 const smsCostSetting = document.querySelector(".smsCostSetting");

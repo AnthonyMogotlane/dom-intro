@@ -27,11 +27,11 @@ const calculateBill = () => {
     const getTotalBill = () => setTotalBill();
     //set warning and critical level
     const setlevelIndicator = () => {
-        if(getTotalBill() >= 30) {
+        if(getTotalBill() >= 50) {
             return "danger";
-        } else if(getTotalBill() >= 20) {
+        } else if(getTotalBill() >= 30) {
             return "warning";
-        } else if(getTotalBill() < 20) {
+        } else if(getTotalBill() < 30) {
             return "dark";
         }
     }
