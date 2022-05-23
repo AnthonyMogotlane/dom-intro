@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-
+  
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- handlebars cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  </head>
+  
 <body>
   <div class="container">
     <div class="row">
@@ -133,7 +135,7 @@
           <div class="six columns">
             <h5>Bill type</h5>
             <label class="">
-              <input type="radio" name="billItemType" id="callOne" class="billItemTypeRadio" checked value="call">
+              <input type="radio" name="billItemType" id="callOne" class="billItemTypeRadio" value="call">
               <span class="label-body">Call</span>
             </label>
             <label class="">
@@ -235,8 +237,6 @@
       <td>R<span class={{color}}>{{totalBill}}</span></td>
     </tr>
   </script>
-  <!-- handlebars cdn -->
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
   <!-- functions -->
   <script src="function/calculateBill.js"></script>
   <script src="function/radioButton.js"></script>
