@@ -8,13 +8,16 @@ let radioBillCosts = radioBill();
 
 //Event listener for Radio button bill widget
 addToRadioBillBtn.addEventListener("click", () => {
-    radioChecked.forEach(check => {
-        if (radioBillCosts.setBill(check.value) === "call") {
-            radioBillCosts.setCallCost();
-        } else if (check.value === "sms") {
-            radioBillCosts.setSmsCost();
-        }
-    })
+    let theChecked;
+    for(let check of radioChecked) if (check.checked) theChecked = check.value;
+
+    if(theChecked === "call") {
+        radioBillCosts.setBill(theChecked)
+        radioBillCosts.setCallCost();
+    } else if(theChecked === "sms") {
+        radioBillCosts.setBill(theChecked)
+        radioBillCosts.setSmsCost();
+    }
     radioHandlebarsTemplate(radioBillCosts.getCallCost(), radioBillCosts.getSmsCost(), radioBillCosts.getTotalBill());
 });
 
